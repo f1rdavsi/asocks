@@ -1,0 +1,86 @@
+.support {
+  padding: 80px 0;
+  background: #f9f9fb;
+
+  @media (max-width: 768px) {
+    padding: 40px 0;
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start; /* изображение слева */
+  
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+  }
+
+  @media (max-width: 1024px) {
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+}
+h2{
+  text-align: center;
+  font-size: 48px;
+}
+.text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h3 {
+    font-size: 35px;
+    font-weight: 800;
+    color: #414353;
+    text-align: center; /* заголовок по центру */
+    margin-bottom: 24px;
+    line-height: 1.2;
+
+    @media (max-width: 768px) {
+      font-size: 32px;
+    }
+  }
+
+  p {
+    font-size: 18px;
+    color: #9c9dc0;
+    margin-bottom: 24px;
+  }
+
+  .features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 32px;
+
+    li {
+      margin-bottom: 12px;
+      font-size: 16px;
+      color: #414353;
+    }
+  }
+
+  button {
+    align-self: flex-start;
+
+    @media (max-width: 1024px) {
+      align-self: center;
+    }
+  }
+}

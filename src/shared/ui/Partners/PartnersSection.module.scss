@@ -1,0 +1,60 @@
+.section {
+  position: relative;
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.swiper {
+  padding: 20px 0;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  padding-top: 10px;
+  width: 100%;
+  max-width: 220px;
+  margin: 0 30px;
+  height: 120px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+  background: 
+    radial-gradient(40.98% 40.98% at 45.86% 100%, rgba(0, 255, 25, 0.1) 0%, rgba(0, 255, 25, 0) 100%),
+    radial-gradient(42.62% 139.24% at 0% 36.07%, rgba(112, 0, 254, 0.1) 0%, rgba(66, 0, 255, 0) 0),
+    radial-gradient(68.85% 126.58% at 92.36% 8.2%, rgba(251, 211, 0, 0.1) 0%, rgba(255, 168, 0, 0) 100%);
+  border: 1px solid;
+  border-image-source: linear-gradient(147.23deg, rgba(246, 252, 255, 0.1) 19.7%, rgba(124, 78, 255, 0.1) 83.54%);
+  backdrop-filter: blur(24px);
+
+  box-shadow: 
+    0px 8px 16px rgba(124, 78, 255, 0.25),
+    0px 16px 32px rgba(124, 78, 255, 0.2),
+    0px 24px 48px rgba(124, 78, 255, 0.15);
+  img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
+}
+:global(.swiper-slide-active) .card {
+  transform: scale(1.2);
+  background: #7C4EFF1A; // слегка фиолетовый фон
+  border: 2px solid;
+  border-image-source: linear-gradient(147.23deg, rgba(246, 252, 255, 0.1) 19.7%, rgba(124, 78, 255, 0.1) 83.54%);
+  backdrop-filter: blur(30px);
+  box-shadow: 
+    0px 16px 32px rgba(124, 78, 255, 0.35),
+    0px 24px 48px rgba(124, 78, 255, 0.25),
+    0px 32px 64px rgba(124, 78, 255, 0.2);
+}
