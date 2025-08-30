@@ -1,0 +1,68 @@
+.statistics {
+  background: #f9f9fb;
+  padding: 0 0 80px;
+
+  @media (max-width: 768px) {
+    padding: 0 0 40px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+
+  @media (max-width: 968px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.statItem {
+  text-align: center;
+  padding: 20px;
+}
+
+.value {
+  font-size: 48px;
+  font-weight: 800;
+  color: #414353;
+  line-height: 1.1;
+  margin-bottom: 8px;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+  }
+}
+
+.label {
+  font-size: 16px;
+  color: #9c9dc0;
+  font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.skeleton {
+  height: 100px;
+  background: linear-gradient(90deg, #e1e5e9 25%, #f0f2f5 50%, #e1e5e9 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
