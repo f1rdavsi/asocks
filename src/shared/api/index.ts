@@ -1,80 +1,79 @@
-import type { ApiResponse, Tariff, Statistics, ProxyLocation } from '@shared/types';
-import { mockStatistics, mockTariffs, mockLocations, mockWhyChooseUs, mockApplications } from './mock-data';
-
+import type { ApiResponse, Tariff, Statistics, ProxyLocation } from '@shared/types'
+import { mockStatistics, mockTariffs, mockLocations, mockWhyChooseUs, mockApplications } from './mock-data'
+//TODO: Надо добавить toast
 // Симуляция задержки API
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
 export const api = {
   async getStatistics(): Promise<ApiResponse<Statistics>> {
-    await delay(500);
+    await delay(500)
     return {
       data: mockStatistics,
-      success: true
-    };
+      success: true,
+    }
   },
 
   async getTariffs(): Promise<ApiResponse<Tariff[]>> {
-    await delay(800);
+    await delay(800)
     return {
       data: mockTariffs,
-      success: true
-      
-    };
+      success: true,
+    }
   },
 
   async getLocations(): Promise<ApiResponse<ProxyLocation[]>> {
-    await delay(600);
+    await delay(600)
     return {
       data: mockLocations,
-      success: true
-    };
+      success: true,
+    }
   },
 
   async getWhyChooseUs(): Promise<ApiResponse<typeof mockWhyChooseUs>> {
-    await delay(400);
+    await delay(400)
     return {
       data: mockWhyChooseUs,
-      success: true
-    };
+      success: true,
+    }
   },
 
   async getApplications(): Promise<ApiResponse<string[]>> {
-    await delay(300);
+    await delay(300)
     return {
       data: mockApplications,
-      success: true
-    };
+      success: true,
+    }
   },
 
   async login(email: string, password: string): Promise<ApiResponse<{ token: string }>> {
-    await delay(1000);
+    await delay(1000)
     if (email && password) {
       return {
         data: { token: 'mock-jwt-token' },
         success: true,
-        message: 'Login successful'
-      };
+        message: 'Login successful',
+      }
     }
     return {
       data: { token: '' },
       success: false,
-      message: 'Invalid credentials'
-    };
+      message: 'Invalid credentials',
+    }
   },
 
   async register(email: string, password: string): Promise<ApiResponse<{ token: string }>> {
-    await delay(1200);
+    await delay(1200)
     if (email && password) {
       return {
         data: { token: 'mock-jwt-token' },
         success: true,
-        message: 'Registration successful'
-      };
+        message: 'Registration successful',
+      }
     }
     return {
       data: { token: '' },
       success: false,
-      message: 'Registration failed'
-    };
-  }
-};
+      message: 'Registration failed',
+    }
+  },
+}

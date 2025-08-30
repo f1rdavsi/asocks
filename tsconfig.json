@@ -37,9 +37,10 @@
         "./src/shared/*"
       ]
     },
-    "jsxImportSource": "same-runtime/dist"
+    "jsxImportSource": "react"
   },
   "include": [
     "src"
   ]
+  
 }

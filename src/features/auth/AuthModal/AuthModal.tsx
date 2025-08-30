@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Modal, Button, Input } from '@shared/ui';
 import { api } from '@shared/api';
 import styles from './AuthModal.module.scss';
+// TODO: Добавить FC и import { useTranslation } from 'react-i18next';
 
 interface AuthModalProps {
   isOpen: boolean;
