@@ -12,7 +12,7 @@
   font-weight: 800;
   color: #414353;
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
   line-height: 1.2;
 
   @media (max-width: 768px) {
@@ -20,34 +20,58 @@
     margin-bottom: 40px;
   }
 }
-
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(2, 1fr); // 2 блока на десктопе
+  gap: 30px;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; // на мобильных 1 блок
     gap: 32px;
   }
 }
 
 .item {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
   padding: 32px 24px;
-  border-radius: 16px;
-  background: #f9f9fb;
+  border-radius: 20px;
+  background: #fdfdff;
   border: 1px solid #e1e5e9;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(157, 89, 204, 0.1);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(157, 89, 204, 0.2);
     border-color: #9d59cc;
+    background: #f8f5ff;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px;
   }
 }
 
+.itemImage {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.itemContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .itemTitle {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: #414353;
   margin-bottom: 12px;
@@ -56,13 +80,13 @@
 
 .itemDescription {
   font-size: 16px;
-  color: #9c9dc0;
-  line-height: 1.5;
+  color: #7a7a8c;
+  line-height: 1.6;
   margin: 0;
 }
 
 .skeleton {
-  height: 200px;
+  height: 220px;
   background: linear-gradient(90deg, #e1e5e9 25%, #f0f2f5 50%, #e1e5e9 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;

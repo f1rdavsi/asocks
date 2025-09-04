@@ -5,6 +5,8 @@ export { Hero } from './Hero';
 export { Statistics } from './Statistics';
 export { WhyChooseUs } from './WhyChooseUs';
 export { Pricing } from './Pricing';
+export { Application } from './Application';
+export { TechSupport } from './TechSupport';
 export { Footer } from './Footer';
 export { Modal } from './Modal';
 export { Input } from './Input';

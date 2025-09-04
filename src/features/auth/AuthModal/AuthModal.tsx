@@ -1,116 +1,129 @@
-import type React from 'react';
-import { useState } from 'react';
-import { Modal, Button, Input } from '@shared/ui';
-import { api } from '@shared/api';
-import styles from './AuthModal.module.scss';
-// TODO: Добавить FC и import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { Modal, Button, Input } from '@shared/ui'
+import { api } from '@shared/api'
+import { toast } from 'react-toastify'
+import { useUser } from '@shared/context/UserContext'
+import styles from './AuthModal.module.scss'
 
 interface AuthModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  defaultMode?: 'login' | 'register';
+  isOpen: boolean
+  onClose: () => void
+  defaultMode?: 'login' | 'register'
 }
 
-export const AuthModal: React.FC<AuthModalProps> = ({
-  isOpen,
-  onClose,
-  defaultMode = 'login'
-}) => {
-  const [mode, setMode] = useState<'login' | 'register'>(defaultMode);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+interface FormValues {
+  email: string
+  password: string
+  confirmPassword?: string
+}
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
+export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultMode = 'login' }) => {
+  const [mode, setMode] = useState<'login' | 'register'>(defaultMode)
+  const { setUser } = useUser()
 
-    if (mode === 'register' && password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
+  const {
+    control,
+    handleSubmit,
+    watch,
+    setError,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    defaultValues: { email: '', password: '', confirmPassword: '' },
+  })
 
-    setLoading(true);
+  const password = watch('password')
 
+  // --- Отдельные функции для API ---
+  const handleLogin = async (email: string, password: string) => {
+    return api.login(email, password)
+  }
+
+  const handleRegister = async (email: string, password: string) => {
+    return api.register(email, password)
+  }
+
+  // --- Отправка формы ---
+  const onSubmit = async (data: FormValues) => {
     try {
-      const response = mode === 'login'
-        ? await api.login(email, password)
-        : await api.register(email, password);
+      if (mode === 'register' && data.password !== data.confirmPassword) {
+        setError('confirmPassword', { type: 'manual', message: 'Passwords do not match' })
+        return
+      }
+
+      const response =
+        mode === 'login'
+          ? await handleLogin(data.email, data.password)
+          : await handleRegister(data.email, data.password)
 
       if (response.success) {
-        // Здесь можно добавить логику сохранения токена
-        console.log('Success:', response.message);
-        onClose();
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
+        // Установка пользователя в контекст
+        setUser({ name: response.data.name, email: data.email })
+        toast.success(
+          mode === 'login' ? `Welcome back, ${response.data.name}!` : `Registered successfully, ${response.data.name}!`,
+        )
+        reset()
+        onClose()
       } else {
-        setError(response.message || 'An error occurred');
+        toast.error(response.message || 'Something went wrong')
       }
-    } catch (error) {
-      setError('Network error occurred');
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Network error')
     }
-  };
+  }
 
   const switchMode = () => {
-    setMode(mode === 'login' ? 'register' : 'login');
-    setError('');
-  };
+    setMode(mode === 'login' ? 'register' : 'login')
+  }
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title={mode === 'login' ? 'Sign In' : 'Create Account'}
-    >
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <Input
-          type="email"
-          label="Email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+    <Modal isOpen={isOpen} onClose={onClose} title={mode === 'login' ? 'Sign In' : 'Create Account'}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        {/* Email */}
+        <Controller
+          name="email"
+          control={control}
+          rules={{
+            required: 'Email required',
+            pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' },
+          }}
+          render={({ field }) => <Input {...field} label="Email" placeholder="Enter your email" />}
         />
+        {errors.email && <p className={styles.error}>{errors.email.message}</p>}
 
-        <Input
-          type="password"
-          label="Password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
+        {/* Password */}
+        <Controller
+          name="password"
+          control={control}
+          rules={{
+            required: 'Password required',
+            minLength: { value: 6, message: 'Minimum 6 characters' },
+          }}
+          render={({ field }) => (
+            <Input {...field} type="password" label="Password" placeholder="Enter your password" />
+          )}
         />
+        {errors.password && <p className={styles.error}>{errors.password.message}</p>}
 
+        {/* Confirm password только для регистрации */}
         {mode === 'register' && (
-          <Input
-            type="password"
-            label="Confirm Password"
-            placeholder="Confirm your password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
+          <Controller
+            name="confirmPassword"
+            control={control}
+            rules={{
+              required: 'Confirm password',
+              validate: value => value === password || 'Passwords do not match',
+            }}
+            render={({ field }) => (
+              <Input {...field} type="password" label="Confirm Password" placeholder="Confirm your password" />
+            )}
           />
         )}
+        {errors.confirmPassword && <p className={styles.error}>{errors.confirmPassword.message}</p>}
 
-        {error && (
-          <div className={styles.error}>
-            {error}
-          </div>
-        )}
-
-        <Button
-          type="submit"
-          variant="primary"
-          size="large"
-          disabled={loading}
-          className={styles.submitButton}
-        >
-          {loading ? 'Please wait...' : (mode === 'login' ? 'Sign In' : 'Create Account')}
+        <Button type="submit" variant="primary" size="large" disabled={isSubmitting} className={styles.submitButton}>
+          {isSubmitting ? 'Please wait...' : mode === 'login' ? 'Sign In' : 'Create Account'}
         </Button>
 
         <div className={styles.switchMode}>
@@ -132,5 +145,5 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         </div>
       </form>
     </Modal>
-  );
-};
+  )
+}

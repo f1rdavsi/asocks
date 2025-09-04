@@ -1,20 +1,24 @@
-import type React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { HomePage } from '@pages/home';
-import { ROUTES } from '@shared/config';
-// import { notFound } from 'next/navigation'; 
-import { NotFoundPage } from '@pages/NotFoundPage/NotFoundPage';
-
-
+import type React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HomePage } from '@pages/home'
+import { ROUTES } from '@shared/config'
+import { NotFoundPage } from '@pages/NotFoundPage/NotFoundPage'
+import { PartnersPage } from '@pages/partners/PartnersPage'
+import { UserProvider } from '@shared/context/UserContext'
+import { LoginPage } from '@pages/auth/LoginPage'
 export const AppRouter: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={ROUTES.HOME} element={<HomePage />} />
-        {/* TODO: Другие роуты надо добавить  позже */}
-        
-        <Route path="*" element={<NotFoundPage/>} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
+    <UserProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+
+          <Route path={ROUTES.HOME} element={<HomePage />} />
+          <Route path={ROUTES.PARTNERS} element={<PartnersPage />} />
+          {/* TODO: Другие роуты добавить позже */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
+  )
+}

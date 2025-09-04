@@ -2,9 +2,8 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import en from '../../src/locales/en.json'
 import ru from '../../src/locales/ru.json'
-import tg from '../../src/locales/tg.json'
 i18n.use(initReactI18next).init({
-  lng: 'ru',
+  lng: 'en',
   fallbackLng: 'ru',
   interpolation: {
     escapeValue: false,
@@ -16,10 +15,8 @@ i18n.use(initReactI18next).init({
     ru: {
       translation: ru,
     },
-    tg: {
-      translation: tg,
-    },
+    
   },
 })
 
-export default i18n;
+export default i18n

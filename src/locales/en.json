@@ -1,4 +1,11 @@
 {
-  "sell": "Sell proxies",
-  "buy": "Buy proxies" 
+  "hero": {
+    "reviewsText": "Read our reviews on",
+    "title": "Only the most <1>stable</1> proxy",
+    "subtitle": "Universal proxy service with the<br />best functionality",
+    "buttons": {
+      "sell": "Sell proxy",
+      "buy": "Buy proxy"
+    }
+  }
 }
