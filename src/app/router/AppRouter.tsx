@@ -6,6 +6,7 @@ import { NotFoundPage } from '@pages/NotFoundPage/NotFoundPage'
 import { PartnersPage } from '@pages/partners/PartnersPage'
 import { UserProvider } from '@shared/context/UserContext'
 import { LoginPage } from '@pages/auth/LoginPage'
+import { GeoPage } from '@pages/geo/GeoPage'
 export const AppRouter: React.FC = () => {
   return (
     <UserProvider>
@@ -15,6 +16,7 @@ export const AppRouter: React.FC = () => {
 
           <Route path={ROUTES.HOME} element={<HomePage />} />
           <Route path={ROUTES.PARTNERS} element={<PartnersPage />} />
+          <Route path={ROUTES.GEO} element={<GeoPage />} />
           {/* TODO: Другие роуты добавить позже */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

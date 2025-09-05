@@ -1,0 +1,217 @@
+.countries {
+  padding: 80px 400px;
+  background-color: #F9FBFD;
+
+  @media (max-width: 768px) {
+    padding: 40px 10px;
+  }
+
+  &__title {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--color-text);
+    text-align: center;
+    margin-bottom: 50px;
+    line-height: 1.2;
+
+    @media (max-width: 768px) {
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__search {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+
+    input {
+      width: 100%;
+      max-width: 600px;
+      padding: 14px 20px;
+      border: 1px solid var(--color-border-light);
+      border-radius: 14px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background: white;
+      color: var(--color-text);
+
+      &:focus {
+        border-color: var(--color-primary);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(157, 89, 204, 0.15);
+      }
+
+      &::placeholder {
+        color: var(--color-text-light);
+      }
+    }
+  }
+
+  &__alphabet {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 50px;
+
+    .countries__letter {
+      width: 50px;
+      height: 50px;
+      padding: 0 14px;
+      background-color: #F9FBFD;
+      border-radius: 50px;
+      border: 1px solid var(--color-border-light);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--color-text-light);
+
+      &:hover {
+        background: #f2f2f9;
+        color: var(--color-text);
+      }
+
+      &.active {
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+        box-shadow: 0 12px 28px rgba(157, 89, 204, 0.15);
+        color: #fff;
+      }
+
+      &.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      @media (max-width: 768px) {
+        width: 40px;
+        height: 40px;
+        padding: 0 10px;
+      }
+    }
+  }
+
+  /* ---------------- Группировка по буквам ---------------- */
+  &__letter-group {
+    margin-bottom: 40px;
+
+    &__title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    &__row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    &__item {
+      flex: 0 0 calc(25% - 16px);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #fdfdff;
+      border: 1px solid var(--color-border-light);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 12px 28px rgba(157, 89, 204, 0.15);
+        border-color: var(--color-primary);
+      }
+
+      @media (max-width: 768px) {
+        flex: 0 0 calc(50% - 12px);
+      }
+
+      @media (max-width: 480px) {
+        flex: 0 0 100%;
+      }
+
+      .countries__letter-group__flag {
+        width: 50px;
+        height: 34px;
+        object-fit: cover;
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+
+      .countries__letter-group__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .countries__letter-group__name {
+        font-weight: 600;
+        color: var(--color-text);
+        margin-bottom: 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .countries__letter-group__ips {
+        font-size: 14px;
+        color: var(--color-text-light);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  /* ---------------- Skeleton Loader ---------------- */
+  &__skeleton {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 24px;
+    border-radius: 20px;
+    background: #fdfdff;
+    border: 1px solid var(--color-border-light);
+    margin-bottom: 16px;
+
+    .skeleton-flag,
+    .skeleton-text,
+    .skeleton-ips {
+      border-radius: 6px;
+      background: linear-gradient(90deg, #e1e5e9 25%, #f0f2f5 50%, #e1e5e9 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+
+    .skeleton-flag {
+      width: 50px;
+      height: 34px;
+      flex-shrink: 0;
+    }
+
+    .skeleton-text {
+      flex: 1;
+      height: 20px;
+    }
+
+    .skeleton-ips {
+      width: 90px;
+      height: 18px;
+    }
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
