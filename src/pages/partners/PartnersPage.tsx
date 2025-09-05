@@ -9,6 +9,7 @@ import { Modal } from '../../shared/ui/Modal'
 import { NAVIGATION_ITEMS } from '@shared/config'
 import { AuthModal } from '@features/auth/AuthModal'
 import { Partner } from './types'
+import { Link } from 'react-router-dom'
 
 const Navbar: React.FC<{ open: boolean; onRegisterClick: () => void }> = ({ open, onRegisterClick }) => (
   <nav className={`${styles.nav} ${open ? styles.navOpen : ''}`}>
@@ -54,7 +55,9 @@ export const PartnersPage: React.FC = () => {
     <div className={styles.page}>
       {/* Header */}
       <header className={styles.header}>
-        <img src={Logo} alt="asocks" className={styles.logo} />
+        <Link to="/" className={styles.logo}>
+          <img src={Logo} alt="asocks" className={styles.logo} />
+        </Link>
 
         <Navbar
           open={menuOpen}

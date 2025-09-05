@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Header, Footer } from '@shared/ui';
 import { CountriesList } from '@shared/ui/CountriesList';
+import { ProxiesSection } from '@shared/ui/ProxiesSection';
 
 
 export const GeoPage: React.FC = () => {
@@ -17,6 +18,7 @@ export const GeoPage: React.FC = () => {
   return (
     <div>
       <Header />
+      <ProxiesSection/>
       <CountriesList/>
       <Footer />
     </div>

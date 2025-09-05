@@ -1,0 +1,121 @@
+.proxies {
+  padding: 80px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 50px;
+
+    .highlight {
+      color: #00c48c;
+    }
+  }
+
+  .cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px; // расстояние между карточками
+    align-items: stretch;
+    position: relative; // для линии
+
+    .card {
+      background: #fff;
+      padding: 30px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+
+      .cardImage {
+        width: 100px;
+        margin-bottom: 20px;
+        object-fit: contain;
+      }
+
+      &:nth-child(2) .cardImage {
+        width: 150px;
+        padding-top: 15px;
+      }
+
+      .cardTitle {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .cardDescription {
+        font-size: 1rem;
+        margin-bottom: 15px;
+      }
+
+      .features {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        margin-top: auto;
+
+        .feature {
+          position: relative;
+          padding-left: 20px;
+          margin-bottom: 10px;
+
+          &::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #00c48c;
+          }
+        }
+      }
+    }
+
+    // линия-разделитель
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      height: 90%;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background-color: #ccc;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1; // чтобы карточки были поверх линии
+    }
+  }
+
+  .priceText {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+
+    .price {
+      font-weight: 700;
+      color: #7c5dfa;
+    }
+  }
+
+  .buttonWrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    .cards {
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+
+      &::before {
+        display: none; // скрываем вертикальную линию на мобилке
+      }
+    }
+  }
+}

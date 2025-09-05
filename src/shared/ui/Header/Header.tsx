@@ -1,5 +1,8 @@
 import type React from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
+
 import { Container, Button } from '@shared/ui'
 import { AuthModal } from '@features/auth/AuthModal'
 import { NAVIGATION_ITEMS } from '@shared/config'
@@ -15,7 +18,7 @@ export const Header: React.FC = () => {
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login')
   const { i18n } = useTranslation()
-  const { user, signOut } = useUser() // <-- получаем пользователя и signOut
+  const { user, signOut } = useUser()
 
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     i18n.changeLanguage(event.target.value)
@@ -25,17 +28,29 @@ export const Header: React.FC = () => {
     <header className={styles.header}>
       <Container>
         <div className={styles.headerContent}>
-          <div className={styles.logo}>
+          <Link to="/" className={styles.logo}>
             <img src={Logo} alt="Asocks" />
             <span>Asocks</span>
-          </div>
+          </Link>
 
           <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ''}`}>
-            {NAVIGATION_ITEMS.map(item => (
-              <a key={item.href} href={item.href} className={styles.navLink}>
-                {item.label}
-              </a>
-            ))}
+            {NAVIGATION_ITEMS.map(item => {
+              const isHashLink = item.href.includes('#')
+              return isHashLink ? (
+                <HashLink
+                  key={item.href}
+                  smooth
+                  to={item.href}
+                  className={styles.navLink}
+                  onClick={() => setIsMenuOpen(false)}>
+                  {item.label}
+                </HashLink>
+              ) : (
+                <Link key={item.href} to={item.href} className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
+                  {item.label}
+                </Link>
+              )
+            })}
           </nav>
 
           <div className={styles.actions}>
