@@ -205,5 +205,14 @@
     "noPartners": "Партнёры не найдены",
     "modalButton": "Перейти на страницу {name}",
     "footerRights": "Все права защищены"
+  },
+  "reliable": {
+    "title": {
+      "part1": "Сеть ReliableProxy, но намного",
+      "highlight": "дешевле"
+    },
+    "subtitle": "Скорость, стабильность и анонимность — всё в одном сервисе",
+    "button": "Начать",
+    "imageAlt": "ReliableProxy"
   }
 }

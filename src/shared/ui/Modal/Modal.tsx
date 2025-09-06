@@ -1,15 +1,7 @@
 import type React from 'react';
 import { useEffect } from 'react';
 import styles from './Modal.module.scss';
-
-interface ModalProps {
-  children: React.ReactNode;
-  isOpen: boolean;
-  onClose: () => void;
-  title?: string;
-  className?: string;
-}
-
+import type { ModalProps } from './types';
 export const Modal: React.FC<ModalProps> = ({
   children,
   isOpen,

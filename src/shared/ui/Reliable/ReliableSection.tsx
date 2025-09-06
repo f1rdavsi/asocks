@@ -1,27 +1,29 @@
 import type React from 'react'
-import { useState } from 'react'
 import { Container, Button } from '@shared/ui'
 import styles from './ReliableSection.module.scss'
-import HeroImage from '@shared/assets/images/reliable.png' // убедись, что путь правильный
+import HeroImage from '@shared/assets/images/reliable.png'
+import { useTranslation } from 'react-i18next'
 
 export const ReliableSection: React.FC = () => {
+  const { t } = useTranslation()
+
   return (
     <section className={styles.section}>
       <Container className={styles.container}>
         {/* Левая сторона */}
         <div className={styles.left}>
           <h1 className={styles.title}>
-            ReliableProxy network but much <span className={styles.highlight}>cheaper</span>.
+            {t('reliable.title.part1')} <span className={styles.highlight}>{t('reliable.title.highlight')}</span>.
           </h1>
-          <p className={styles.subtitle}>Speed, Stability and Anonymity - All in one service</p>
+          <p className={styles.subtitle}>{t('reliable.subtitle')}</p>
           <Button variant="primary" size="large">
-            Begin
+            {t('reliable.button')}
           </Button>
         </div>
 
         {/* Правая сторона */}
         <div className={styles.right}>
-          <img src={HeroImage} alt="ReliableProxy" className={styles.image} />
+          <img src={HeroImage} alt={t('reliable.imageAlt')} className={styles.image} />
         </div>
       </Container>
     </section>

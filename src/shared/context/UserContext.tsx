@@ -1,20 +1,8 @@
 // shared/context/UserContext.tsx
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 import type { Tariff } from '@shared/types'
-
-interface User {
-  name: string
-  email: string
-  purchasedTariffs?: Tariff[]
-}
-
-interface UserContextProps {
-  user: User | null
-  setUser: (user: User) => void
-  addPurchasedTariff: (tariff: Tariff) => void
-  signOut: () => void
-}
-
+import type { User } from './types'
+import type { UserContextProps } from './types'
 const UserContext = createContext<UserContextProps | undefined>(undefined)
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

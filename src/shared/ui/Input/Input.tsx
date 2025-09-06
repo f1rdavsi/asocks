@@ -1,20 +1,7 @@
 import type React from 'react';
 import { forwardRef } from 'react';
 import styles from './Input.module.scss';
-
-interface InputProps {
-  type?: 'text' | 'email' | 'password' | 'tel' | 'number';
-  placeholder?: string;
-  value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  disabled?: boolean;
-  error?: string;
-  label?: string;
-  required?: boolean;
-  className?: string;
-}
-
+import type { InputProps } from './types';
 export const Input = forwardRef<HTMLInputElement, InputProps>(({
   type = 'text',
   placeholder,

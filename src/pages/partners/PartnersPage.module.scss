@@ -4,7 +4,6 @@
   min-height: 100vh;
 }
 
-/* ===== HEADER ===== */
 .header {
   display: flex;
   align-items: center;
@@ -19,7 +18,7 @@
   height: 40px;
 
   @media (max-width: 768px) {
-    height: 28px; /* меньше логотип */
+    height: 28px; 
   }
 }
 .noPartners {
@@ -121,7 +120,6 @@
   }
 }
 
-/* ===== MODAL ===== */
 .modal {
   background-color: #272b35;
   color: #fff;
@@ -135,8 +133,6 @@
 .modalButton {
   margin-top: 20px;
 }
-
-/* ===== BUTTONS ===== */
 
 
 .registerBtn {
@@ -154,7 +150,6 @@
     box-shadow: 0 0 12px rgba(124, 58, 237, 0.9), 0 0 24px rgba(167, 139, 250, 0.7);
   }
 }
-/* ===== HERO ===== */
 .hero {
   display: flex;
   align-items: center;
@@ -187,7 +182,7 @@
     }
 
     @media (max-width: 768px) {
-      font-size: 36px; /* меньше заголовок */
+      font-size: 36px;
     }
   }
 
@@ -198,7 +193,7 @@
     color: #ffffff;
 
     @media (max-width: 768px) {
-      font-size: 14px; /* текст тоже компактнее */
+      font-size: 14px; 
     }
   }
 }
@@ -214,11 +209,10 @@
     height: auto;
 
     @media (max-width: 768px) {
-      display: none; /* картинка сжимается */
+      display: none;
     }
   }
 }
-/* ===== PARTNERS ===== */
 .partners {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -266,8 +260,8 @@
 }
 
 .footer {
-  background: #111; /* тёмный фон */
-  color: #fff; /* белый текст */
+  background: #111; 
+  color: #fff; 
   padding: 30px 40px;
   display: flex;
   align-items: center;

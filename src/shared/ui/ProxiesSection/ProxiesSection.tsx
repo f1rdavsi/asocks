@@ -1,26 +1,14 @@
 import type React from 'react'
 import { useState } from 'react'
 import { Container, Button } from '@shared/ui'
-import { AuthModal } from '@features/auth/AuthModal'
+import { AuthModal } from '@features/AuthModal'
 import styles from './ProxiesSection.module.scss'
 import { useUser } from '@shared/context/UserContext'
 import { toast } from 'react-toastify'
 import ResidentialImage from '@shared/assets/images/residental.svg'
 import MobileImage from '@shared/assets/images/mobile.svg'
 import { useTranslation } from 'react-i18next'
-
-interface ProxyItem {
-  id: string
-  title: string
-  description: string
-  features: string[]
-  image: string
-  price: number
-  proxyCount: number
-  pricePerProxy: number
-  connections: number
-}
-
+import type { ProxyItem } from './types'
 export const ProxiesSection: React.FC = () => {
   const { t } = useTranslation()
   const { user, addPurchasedTariff } = useUser()

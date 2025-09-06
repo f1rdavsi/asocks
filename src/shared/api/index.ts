@@ -1,20 +1,9 @@
 import type { ApiResponse, Tariff, Statistics, ProxyLocation } from '@shared/types'
 import { mockStatistics, mockTariffs, mockLocations, mockWhyChooseUs, mockApplications } from './mock-data'
 import axios from 'axios'
+import { API_URL } from '@shared/config'
+import { mockUsers } from './mock-data'
 
-// 🔹 Моки пользователей (локальные)
-export interface MockUser {
-  email: string
-  password: string
-  name: string
-}
-
-export const mockUsers: MockUser[] = [
-  { email: 'john@example.com', password: '123456', name: 'John Doe' },
-  { email: 'alice@example.com', password: 'abcdef', name: 'Alice Smith' },
-]
-
-// 🔹 Симуляция задержки API
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
 export const api = {
@@ -43,14 +32,12 @@ export const api = {
     return { data: mockApplications, success: true }
   },
 
-  // 🔹 Логин через DummyJSON с fallback на моки
   async login(email: string, password: string): Promise<ApiResponse<{ name: string; token: string }>> {
     try {
-      // Если это email → берём часть до @
       const username = email.includes('@') ? email.split('@')[0] : email
 
-      const { data } = await axios.post('https://dummyjson.com/auth/login', {
-        username,
+      const { data } = await axios.post(`${API_URL}/auth/login`, {
+        email,
         password,
       })
 
@@ -60,7 +47,6 @@ export const api = {
         message: 'Login successful',
       }
     } catch (err: any) {
-      // fallback: локальные моки
       const user = mockUsers.find(u => u.email === email && u.password === password)
       if (user) {
         return {
@@ -78,19 +64,17 @@ export const api = {
     }
   },
 
-  // 🔹 Регистрация: DummyJSON + сохранение в моки
   async register(email: string, password: string): Promise<ApiResponse<{ name: string; token: string }>> {
     try {
       const username = email.includes('@') ? email.split('@')[0] : email
 
-      const { data } = await axios.post('https://dummyjson.com/users/add', {
+      const { data } = await axios.post(`${API_URL}/auth/login`, {
         firstName: username,
         username,
         email,
         password,
       })
 
-      // добавляем в локальные моки
       mockUsers.push({ email, password, name: data.firstName })
 
       return {

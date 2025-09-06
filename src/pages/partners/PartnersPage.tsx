@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Modal } from '@shared/ui'
-import { AuthModal } from '@features/auth/AuthModal'
+import { AuthModal } from '@features/AuthModal'
 import Logo from '@shared/assets/logos/logo_2.svg'
 import Shield from '@shared/assets/images/shit.png'
 import { partnersMock } from '@shared/api/mock-data'
@@ -43,7 +43,7 @@ export const PartnersPage: React.FC = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setPartners(partnersMock)
+      setPartners(partnersMock.map(p => ({ ...p, id: p.id.toString() })))
       setLoading(false)
     }, 1000)
     return () => clearTimeout(timer)
@@ -58,7 +58,6 @@ export const PartnersPage: React.FC = () => {
 
   return (
     <div className={styles.page}>
-      {/* Header */}
       <header className={styles.header}>
         <Link to="/" className={styles.logo}>
           <img src={Logo} alt="Asocks" />
@@ -76,7 +75,6 @@ export const PartnersPage: React.FC = () => {
       </header>
 
       <main>
-
         <section className={styles.hero}>
           <div className={styles.heroText}>
             <h1>
@@ -114,9 +112,9 @@ export const PartnersPage: React.FC = () => {
               />
               {selectedPartner.description && <p>{selectedPartner.description}</p>}
               {selectedPartner.url && (
-                <Button className={styles.modalButton} variant="primary" as="a" href={selectedPartner.url}>
+                <a className={styles.modalButton} href={selectedPartner.url} target="_blank" rel="noopener noreferrer">
                   {t('partnersPage.modalButton', { name: selectedPartner.name })}
-                </Button>
+                </a>
               )}
             </>
           )}

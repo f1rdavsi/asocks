@@ -35,7 +35,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultMo
 
   const password = watch('password')
 
-  // --- Отдельные функции для API ---
   const handleLogin = async (email: string, password: string) => {
     return api.login(email, password)
   }
@@ -44,7 +43,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultMo
     return api.register(email, password)
   }
 
-  // --- Отправка формы ---
   const onSubmit = async (data: FormValues) => {
     try {
       if (mode === 'register' && data.password !== data.confirmPassword) {
@@ -58,7 +56,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultMo
           : await handleRegister(data.email, data.password)
 
       if (response.success) {
-        // Сохраняем в контекст и localStorage
         setUser({ name: response.data.name, email: data.email })
         toast.success(
           mode === 'login' ? `Welcome back, ${response.data.name}!` : `Registered successfully, ${response.data.name}!`,
@@ -80,7 +77,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultMo
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={mode === 'login' ? 'Sign In' : 'Create Account'}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        {/* Email */}
         <Controller
           name="email"
           control={control}
@@ -92,7 +88,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultMo
         />
         {errors.email && <p className={styles.error}>{errors.email.message}</p>}
 
-        {/* Password */}
         <Controller
           name="password"
           control={control}
@@ -106,7 +101,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultMo
         />
         {errors.password && <p className={styles.error}>{errors.password.message}</p>}
 
-        {/* Confirm password только для регистрации */}
         {mode === 'register' && (
           <Controller
             name="confirmPassword"

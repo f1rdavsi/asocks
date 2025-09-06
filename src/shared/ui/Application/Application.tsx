@@ -4,11 +4,11 @@ import { Container } from '@shared/ui'
 import { api } from '@shared/api'
 import styles from './Application.module.scss'
 import { useTranslation } from 'react-i18next'
-
-interface Application {
+// import type { Application } from './types'
+export interface Application {
   img: string | undefined
   id: string
-  text: string // теперь это ключ перевода, например 'applications.adVerification'
+  text: string
 }
 
 export const Application: React.FC = () => {

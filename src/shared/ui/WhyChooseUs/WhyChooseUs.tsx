@@ -4,13 +4,7 @@ import { Container } from '@shared/ui'
 import { api } from '@shared/api'
 import styles from './WhyChooseUs.module.scss'
 import { useTranslation } from 'react-i18next'
-
-interface WhyChooseUsItem {
-  img: string | undefined
-  id: string
-  title: string
-  description: string
-}
+import type { WhyChooseUsItem } from './types'
 
 export const WhyChooseUs: React.FC = () => {
   const { t } = useTranslation() // ✅ хук внутри компонента

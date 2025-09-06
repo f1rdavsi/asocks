@@ -200,5 +200,14 @@
     "noPartners": "No partners found",
     "modalButton": "Go to {name} page",
     "footerRights": "All rights reserved"
+  },
+  "reliable": {
+    "title": {
+      "part1": "ReliableProxy network but much",
+      "highlight": "cheaper"
+    },
+    "subtitle": "Speed, Stability and Anonymity - All in one service",
+    "button": "Begin",
+    "imageAlt": "ReliableProxy"
   }
 }

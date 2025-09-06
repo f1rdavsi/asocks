@@ -5,11 +5,8 @@ import { useUser } from '@shared/context/UserContext'
 import { api } from '@shared/api'
 import { toast } from 'react-toastify'
 import styles from './LoginPage.module.scss'
+import type { FormValues } from './types'
 
-interface FormValues {
-  email: string
-  password: string
-}
 
 export const LoginPage: React.FC = () => {
   const { setUser } = useUser()

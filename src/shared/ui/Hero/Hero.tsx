@@ -1,7 +1,7 @@
 import type React from 'react'
 import { useState } from 'react'
 import { Container, Button } from '@shared/ui'
-import { AuthModal } from '@features/auth/AuthModal'
+import { AuthModal } from '@features/AuthModal'
 import styles from './Hero.module.scss'
 import HeroImage from '@shared/assets/images/hero-image.svg'
 import { useTranslation, Trans } from 'react-i18next'
@@ -10,19 +10,17 @@ import { useUser } from '@shared/context/UserContext'
 
 export const Hero: React.FC = () => {
   const { t } = useTranslation()
-  const { user } = useUser() // берём пользователя из контекста
+  const { user } = useUser() 
 
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login')
 
   const handleButtonClick = (mode: 'login' | 'register', url?: string) => {
     if (user && url) {
-      // если пользователь авторизован, переходим на внешний сайт
       window.open(url, '_blank')
       return
     }
 
-    // если не авторизован, открываем модалку
     setAuthMode(mode)
     setAuthModalOpen(true)
   }
@@ -51,10 +49,7 @@ export const Hero: React.FC = () => {
                 onClick={() => handleButtonClick('register', 'https://proxysell.com/')}>
                 {t('hero.buttons.sell')}
               </Button>
-              <Button
-                variant="primary"
-                size="large"
-                onClick={() => handleButtonClick('register', 'login')}>
+              <Button variant="primary" size="large" onClick={() => handleButtonClick('register', 'login')}>
                 {t('hero.buttons.buy')}
               </Button>
             </div>

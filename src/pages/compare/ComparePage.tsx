@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Header, Footer } from '@shared/ui';
-import { CountriesList } from '@shared/ui/CountriesList';
-import { ProxiesSection } from '@shared/ui/ProxiesSection';
 import { ReliableSection } from '@shared/ui/Reliable/ReliableSection';
 
 

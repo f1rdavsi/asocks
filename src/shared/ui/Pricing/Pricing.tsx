@@ -1,7 +1,7 @@
 import type React from 'react'
 import { useEffect, useState } from 'react'
 import { Container, Button } from '@shared/ui'
-import { AuthModal } from '@features/auth/AuthModal'
+import { AuthModal } from '@features/AuthModal'
 import { api } from '@shared/api'
 import type { Tariff } from '@shared/types'
 import styles from './Pricing.module.scss'
@@ -82,7 +82,9 @@ export const Pricing: React.FC = () => {
                   <div className={styles.pricePerProxy}>
                     {t('pricing.pricePerProxy')}
                     <br />
-                    <strong>${tariff.pricePerProxy} / {t('tariff.month')}</strong>
+                    <strong>
+                      ${tariff.pricePerProxy} / {t('tariff.month')}
+                    </strong>
                   </div>
                   <div className={styles.connections}>
                     {t('pricing.connections')}

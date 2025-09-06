@@ -1,11 +1,6 @@
 import type React from 'react';
 import styles from './Container.module.scss';
-
-interface ContainerProps {
-  children: React.ReactNode;
-  className?: string;
-  size?: 'small' | 'medium' | 'large' | 'full';
-}
+import type { ContainerProps } from './types';
 
 export const Container: React.FC<ContainerProps> = ({
   children,
