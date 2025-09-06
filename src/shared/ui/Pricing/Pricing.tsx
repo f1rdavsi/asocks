@@ -7,12 +7,14 @@ import type { Tariff } from '@shared/types'
 import styles from './Pricing.module.scss'
 import { useUser } from '@shared/context/UserContext'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 export const Pricing: React.FC = () => {
+  const { t } = useTranslation()
   const [tariffs, setTariffs] = useState<Tariff[]>([])
   const [loading, setLoading] = useState(true)
   const [authModalOpen, setAuthModalOpen] = useState(false)
-  const { user, addPurchasedTariff } = useUser() // получаем контекст пользователя
+  const { user, addPurchasedTariff } = useUser()
 
   useEffect(() => {
     const fetchTariffs = async () => {
@@ -27,7 +29,6 @@ export const Pricing: React.FC = () => {
         setLoading(false)
       }
     }
-
     fetchTariffs()
   }, [])
 
@@ -37,19 +38,17 @@ export const Pricing: React.FC = () => {
       return
     }
 
-    // Если уже куплен, ничего не делаем
     if (user.purchasedTariffs?.some(t => t.id === tariff.id)) return
 
-    // Добавляем тариф в пользователя
     addPurchasedTariff(tariff)
-    toast.success(`Successfully bought ${tariff.name}!`)
+    toast.success(t('pricing.successToast', { name: t(tariff.name) }))
   }
 
   if (loading) {
     return (
       <section id="pricing" className={styles.section}>
         <Container>
-          <h2 className={styles.title}>Choose your tariff</h2>
+          <h2 className={styles.title}>{t('pricing.title')}</h2>
           <div className={styles.grid}>
             {Array.from({ length: 5 }, (_, i) => (
               <div key={`tariff-skeleton-${i}`} className={styles.skeleton} />
@@ -63,42 +62,46 @@ export const Pricing: React.FC = () => {
   return (
     <section className={styles.section}>
       <Container>
-        <h2 className={styles.title}>Choose your tariff</h2>
-        <p className={styles.subtitle}>the amount of proxy</p>
+        <h2 className={styles.title}>{t('pricing.title')}</h2>
+        <p className={styles.subtitle}>{t('pricing.subtitle')}</p>
 
         <div className={styles.grid}>
           {tariffs.map(tariff => {
             const isPurchased = user?.purchasedTariffs?.some(t => t.id === tariff.id)
             return (
               <div key={tariff.id} className={`${styles.tariffCard} ${tariff.isPopular ? styles.popular : ''}`}>
-                {tariff.isPopular && <div className={styles.popularBadge}>Most Popular</div>}
+                {tariff.isPopular && <div className={styles.popularBadge}>{t('pricing.mostPopular')}</div>}
 
                 <div className={styles.cardHeader}>
-                  <div className={styles.proxyCount}>{tariff.name}</div>
+                  <div className={styles.proxyCount}>{t(tariff.name)}</div>
                   <div className={styles.price}>
                     <span className={styles.currency}>$</span>
                     <span className={styles.amount}>{tariff.price.toFixed(2)}</span>
-                    <span className={styles.period}>/ month</span>
+                    <span className={styles.period}>/ {t('tariff.month')}</span>
                   </div>
                   <div className={styles.pricePerProxy}>
-                    price for one proxy
+                    {t('pricing.pricePerProxy')}
                     <br />
-                    <strong>${tariff.pricePerProxy} per month</strong>
+                    <strong>${tariff.pricePerProxy} / {t('tariff.month')}</strong>
                   </div>
                   <div className={styles.connections}>
-                    the number of connections
+                    {t('pricing.connections')}
                     <br />
                     <strong>{tariff.connections} flows</strong>
                   </div>
 
                   <div className={styles.period}>
-                    <strong>{tariff.features.join(', ')}</strong>
+                    <strong>{tariff.features.map(f => t(f)).join(', ')}</strong>
                   </div>
                 </div>
 
                 <div className={styles.cardFooter}>
                   <Button variant="primary" size="medium" onClick={() => handleBuy(tariff)} disabled={isPurchased}>
-                    {isPurchased ? 'Purchased' : user ? 'Buy' : 'Sign In to Buy'}
+                    {isPurchased
+                      ? t('pricing.button.purchased')
+                      : user
+                        ? t('pricing.button.buy')
+                        : t('pricing.button.signIn')}
                   </Button>
                 </div>
               </div>

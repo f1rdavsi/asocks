@@ -58,7 +58,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultMo
           : await handleRegister(data.email, data.password)
 
       if (response.success) {
-        // Установка пользователя в контекст
+        // Сохраняем в контекст и localStorage
         setUser({ name: response.data.name, email: data.email })
         toast.success(
           mode === 'login' ? `Welcome back, ${response.data.name}!` : `Registered successfully, ${response.data.name}!`,

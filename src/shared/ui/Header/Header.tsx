@@ -2,7 +2,6 @@ import type React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
-
 import { Container, Button } from '@shared/ui'
 import { AuthModal } from '@features/auth/AuthModal'
 import { NAVIGATION_ITEMS } from '@shared/config'
@@ -19,6 +18,7 @@ export const Header: React.FC = () => {
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login')
   const { i18n } = useTranslation()
   const { user, signOut } = useUser()
+  const { t } = useTranslation()
 
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     i18n.changeLanguage(event.target.value)
@@ -43,11 +43,11 @@ export const Header: React.FC = () => {
                   to={item.href}
                   className={styles.navLink}
                   onClick={() => setIsMenuOpen(false)}>
-                  {item.label}
+                  {t(item.label)}
                 </HashLink>
               ) : (
                 <Link key={item.href} to={item.href} className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
-                  {item.label}
+                  {t(item.label)}
                 </Link>
               )
             })}
@@ -71,7 +71,7 @@ export const Header: React.FC = () => {
               <>
                 <span className={styles.username}>Hello, {user.name}</span>
                 <Button variant="secondary" size="small" onClick={signOut}>
-                  SIGN OUT
+                  {t('header.signOut')}
                 </Button>
               </>
             ) : (
@@ -83,7 +83,7 @@ export const Header: React.FC = () => {
                     setAuthMode('register')
                     setAuthModalOpen(true)
                   }}>
-                  REGISTRATION
+                  {t('header.register')}
                 </Button>
 
                 <button

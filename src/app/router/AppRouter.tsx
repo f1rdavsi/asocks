@@ -7,6 +7,7 @@ import { PartnersPage } from '@pages/partners/PartnersPage'
 import { UserProvider } from '@shared/context/UserContext'
 import { LoginPage } from '@pages/auth/LoginPage'
 import { GeoPage } from '@pages/geo/GeoPage'
+import { ComparePage } from '@pages/compare'
 export const AppRouter: React.FC = () => {
   return (
     <UserProvider>
@@ -15,9 +16,10 @@ export const AppRouter: React.FC = () => {
           <Route path="/login" element={<LoginPage />} />
 
           <Route path={ROUTES.HOME} element={<HomePage />} />
+
           <Route path={ROUTES.PARTNERS} element={<PartnersPage />} />
           <Route path={ROUTES.GEO} element={<GeoPage />} />
-          {/* TODO: Другие роуты добавить позже */}
+          <Route path={ROUTES.COMPARE} element={<ComparePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>

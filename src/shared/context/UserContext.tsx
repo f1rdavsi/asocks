@@ -1,47 +1,51 @@
 // shared/context/UserContext.tsx
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import type { Tariff } from '@shared/types';
+import React, { createContext, useContext, useState, ReactNode } from 'react'
+import type { Tariff } from '@shared/types'
 
 interface User {
-  name: string;
-  email: string;
-  purchasedTariffs?: Tariff[];
+  name: string
+  email: string
+  purchasedTariffs?: Tariff[]
 }
 
 interface UserContextProps {
-  user: User | null;
-  setUser: (user: User) => void;
-  addPurchasedTariff: (tariff: Tariff) => void;
-  signOut: () => void;
+  user: User | null
+  setUser: (user: User) => void
+  addPurchasedTariff: (tariff: Tariff) => void
+  signOut: () => void
 }
 
-const UserContext = createContext<UserContextProps | undefined>(undefined);
+const UserContext = createContext<UserContextProps | undefined>(undefined)
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUserState] = useState<User | null>(null);
+  const [user, setUserState] = useState<User | null>(() => {
+    const storedUser = localStorage.getItem('user')
+    return storedUser ? JSON.parse(storedUser) : null
+  })
 
-  const setUser = (userData: User) => setUserState(userData);
+  const setUser = (userData: User) => {
+    setUserState(userData)
+    localStorage.setItem('user', JSON.stringify(userData))
+  }
 
   const addPurchasedTariff = (tariff: Tariff) => {
     if (user) {
-      setUserState({
-        ...user,
-        purchasedTariffs: [...(user.purchasedTariffs || []), tariff],
-      });
+      const updatedUser = { ...user, purchasedTariffs: [...(user.purchasedTariffs || []), tariff] }
+      setUserState(updatedUser)
+      localStorage.setItem('user', JSON.stringify(updatedUser))
     }
-  };
+  }
 
-  const signOut = () => setUserState(null);
+  const signOut = () => {
+    setUserState(null)
+    localStorage.removeItem('user')
+  }
 
-  return (
-    <UserContext.Provider value={{ user, setUser, addPurchasedTariff, signOut }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
+  return <UserContext.Provider value={{ user, setUser, addPurchasedTariff, signOut }}>{children}</UserContext.Provider>
+}
 
 export const useUser = () => {
-  const context = useContext(UserContext);
-  if (!context) throw new Error('useUser must be used within UserProvider');
-  return context;
-};
+  const context = useContext(UserContext)
+  if (!context) throw new Error('useUser must be used within UserProvider')
+  return context
+}

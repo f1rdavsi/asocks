@@ -1,7 +1,8 @@
 import type { ApiResponse, Tariff, Statistics, ProxyLocation } from '@shared/types'
 import { mockStatistics, mockTariffs, mockLocations, mockWhyChooseUs, mockApplications } from './mock-data'
+import axios from 'axios'
 
-// Моки пользователей
+// 🔹 Моки пользователей (локальные)
 export interface MockUser {
   email: string
   password: string
@@ -13,7 +14,7 @@ export const mockUsers: MockUser[] = [
   { email: 'alice@example.com', password: 'abcdef', name: 'Alice Smith' },
 ]
 
-// Симуляция задержки API
+// 🔹 Симуляция задержки API
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
 export const api = {
@@ -42,39 +43,67 @@ export const api = {
     return { data: mockApplications, success: true }
   },
 
+  // 🔹 Логин через DummyJSON с fallback на моки
   async login(email: string, password: string): Promise<ApiResponse<{ name: string; token: string }>> {
-    await delay(1000)
-    const user = mockUsers.find(u => u.email === email && u.password === password)
-    if (user) {
+    try {
+      // Если это email → берём часть до @
+      const username = email.includes('@') ? email.split('@')[0] : email
+
+      const { data } = await axios.post('https://dummyjson.com/auth/login', {
+        username,
+        password,
+      })
+
       return {
-        data: { token: 'mock-jwt-token', name: user.name },
+        data: { token: data.token, name: data.firstName || username },
         success: true,
         message: 'Login successful',
       }
-    }
-    return {
-      data: { token: '', name: '' },
-      success: false,
-      message: 'Invalid credentials',
-    }
-  },
+    } catch (err: any) {
+      // fallback: локальные моки
+      const user = mockUsers.find(u => u.email === email && u.password === password)
+      if (user) {
+        return {
+          data: { token: 'mock-jwt-token', name: user.name },
+          success: true,
+          message: 'Login successful (mock)',
+        }
+      }
 
-  async register(email: string, password: string): Promise<ApiResponse<{ name: string; token: string }>> {
-    await delay(1200)
-    const exists = mockUsers.find(u => u.email === email)
-    if (exists) {
       return {
         data: { token: '', name: '' },
         success: false,
-        message: 'User already exists',
+        message: err.response?.data?.message || 'Invalid credentials',
       }
     }
-    const name = email.split('@')[0] // простой мок имени
-    mockUsers.push({ email, password, name })
-    return {
-      data: { token: 'mock-jwt-token', name },
-      success: true,
-      message: 'Registration successful',
+  },
+
+  // 🔹 Регистрация: DummyJSON + сохранение в моки
+  async register(email: string, password: string): Promise<ApiResponse<{ name: string; token: string }>> {
+    try {
+      const username = email.includes('@') ? email.split('@')[0] : email
+
+      const { data } = await axios.post('https://dummyjson.com/users/add', {
+        firstName: username,
+        username,
+        email,
+        password,
+      })
+
+      // добавляем в локальные моки
+      mockUsers.push({ email, password, name: data.firstName })
+
+      return {
+        data: { token: 'mock-jwt-token', name: data.firstName },
+        success: true,
+        message: 'Registration successful',
+      }
+    } catch (err: any) {
+      return {
+        data: { token: '', name: '' },
+        success: false,
+        message: err.response?.data?.message || 'Registration failed',
+      }
     }
   },
 }

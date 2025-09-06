@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Container } from '@shared/ui'
 import { api } from '@shared/api'
 import styles from './WhyChooseUs.module.scss'
+import { useTranslation } from 'react-i18next'
 
 interface WhyChooseUsItem {
   img: string | undefined
@@ -12,6 +13,7 @@ interface WhyChooseUsItem {
 }
 
 export const WhyChooseUs: React.FC = () => {
+  const { t } = useTranslation() // ✅ хук внутри компонента
   const [items, setItems] = useState<WhyChooseUsItem[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -45,14 +47,14 @@ export const WhyChooseUs: React.FC = () => {
   return (
     <section className={styles.section}>
       <Container>
-        <h2 className={styles.title}>Why companies choose us</h2>
+        <h2 className={styles.title}>{t('why.title')}</h2>
         <div className={styles.grid}>
           {items.map(item => (
             <div key={item.id} className={styles.item}>
-              <img src={item.img} alt={item.title} className={styles.itemImage} />
+              <img src={item.img} alt={t(item.title)} className={styles.itemImage} />
               <div className={styles.itemContent}>
-                <h3 className={styles.itemTitle}>{item.title}</h3>
-                <p className={styles.itemDescription}>{item.description}</p>
+                <h3 className={styles.itemTitle}>{t(item.title)}</h3>
+                <p className={styles.itemDescription}>{t(item.description)}</p>
               </div>
             </div>
           ))}

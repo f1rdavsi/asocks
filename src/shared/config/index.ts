@@ -17,8 +17,9 @@ export const ROUTES = {
 } as const
 
 export const NAVIGATION_ITEMS = [
-  { label: 'Prices', href: ROUTES.PRICING },
-  { label: 'GEO', href: ROUTES.GEO },
-  { label: 'Partners', href: ROUTES.PARTNERS },
-  { label: 'Compare', href: ROUTES.COMPARE },
+  { label: 'nav.prices', href: ROUTES.PRICING },
+  { label: 'nav.geo', href: ROUTES.GEO },
+  { label: 'nav.partners', href: ROUTES.PARTNERS },
+  { label: 'nav.compare', href: ROUTES.COMPARE },
 ] as const
+

@@ -1,30 +1,32 @@
-import type React from 'react';
-import { useEffect, useState } from 'react';
-import { Container } from '@shared/ui';
-import { api } from '@shared/api';
-import type { Statistics as StatisticsType } from '@shared/types';
-import styles from './Statistics.module.scss';
+import type React from 'react'
+import { useEffect, useState } from 'react'
+import { Container } from '@shared/ui'
+import { api } from '@shared/api'
+import type { Statistics as StatisticsType } from '@shared/types'
+import styles from './Statistics.module.scss'
+import { useTranslation } from 'react-i18next'
 
 export const Statistics: React.FC = () => {
-  const [statistics, setStatistics] = useState<StatisticsType | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [statistics, setStatistics] = useState<StatisticsType | null>(null)
+  const [loading, setLoading] = useState(true)
+  const { t } = useTranslation() // ✅ правильный хук
 
   useEffect(() => {
     const fetchStatistics = async () => {
       try {
-        const response = await api.getStatistics();
+        const response = await api.getStatistics()
         if (response.success) {
-          setStatistics(response.data);
+          setStatistics(response.data)
         }
       } catch (error) {
-        console.error('Failed to fetch statistics:', error);
+        console.error('Failed to fetch statistics:', error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchStatistics();
-  }, []);
+    fetchStatistics()
+  }, [])
 
   if (loading) {
     return (
@@ -37,29 +39,17 @@ export const Statistics: React.FC = () => {
           </div>
         </Container>
       </section>
-    );
+    )
   }
 
-  if (!statistics) return null;
+  if (!statistics) return null
 
   const stats = [
-    {
-      value: statistics.connectionSuccess,
-      label: 'Connection success'
-    },
-    {
-      value: statistics.locations,
-      label: 'Locations'
-    },
-    {
-      value: statistics.ipAddresses,
-      label: 'IP addresses'
-    },
-    {
-      value: statistics.satisfiedCustomers,
-      label: 'Satisfied customers'
-    }
-  ];
+    { value: statistics.connectionSuccess, label: 'stats.connectionSuccess' },
+    { value: statistics.locations, label: 'stats.locations' },
+    { value: statistics.ipAddresses, label: 'stats.ipAddresses' },
+    { value: statistics.satisfiedCustomers, label: 'stats.satisfiedCustomers' },
+  ]
 
   return (
     <section className={styles.statistics}>
@@ -68,11 +58,11 @@ export const Statistics: React.FC = () => {
           {stats.map((stat, index) => (
             <div key={`stat-${index}-${stat.label}`} className={styles.statItem}>
               <div className={styles.value}>{stat.value}</div>
-              <div className={styles.label}>{stat.label}</div>
+              <div className={styles.label}>{t(stat.label)}</div>
             </div>
           ))}
         </div>
       </Container>
     </section>
-  );
-};
+  )
+}

@@ -1,0 +1,51 @@
+.section {
+  padding: 80px 0;
+  background: #F9FBFD;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.left {
+  flex: 1;
+
+  .title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+
+    .highlight {
+      color: #9b5de5; // фиолетовый цвет
+    }
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+    color: #555;
+  }
+}
+
+.right {
+  flex: 1;
+
+  .image {
+    width: 100%;
+    max-width: 500px;
+    object-fit: contain;
+
+    @media (max-width: 768px) {
+      margin-top: 30px;
+    }
+  }
+}

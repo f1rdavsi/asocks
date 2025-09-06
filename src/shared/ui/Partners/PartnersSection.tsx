@@ -4,11 +4,14 @@ import 'swiper/css'
 import { Autoplay } from 'swiper/modules'
 import { partnersMock } from '@shared/api/mock-data'
 import styles from './PartnersSection.module.scss'
+import { useTranslation } from 'react-i18next'
 
 export const PartnersSection: React.FC = () => {
+  const { t } = useTranslation()
+
   return (
     <section className={styles.section}>
-      <h2 className={styles.title}>Our Partners</h2>
+      <h2 className={styles.title}>{t('partners.title')}</h2>
 
       <Swiper
         centeredSlides

@@ -1,4 +1,15 @@
 {
+  "nav": {
+    "prices": "Prices",
+    "geo": "GEO",
+    "partners": "Partners",
+    "compare": "Compare"
+  },
+  "header": {
+    "signOut": "Sign Out",
+    "register": "Register",
+    "signIn": "Sign In"
+  },
   "hero": {
     "reviewsText": "Read our reviews on",
     "title": "Only the most <1>stable</1> proxy",
@@ -7,5 +18,187 @@
       "sell": "Sell proxy",
       "buy": "Buy proxy"
     }
+  },
+
+  "stats": {
+    "connectionSuccess": "Connection success",
+    "locations": "Locations",
+    "ipAddresses": "IP addresses",
+    "satisfiedCustomers": "Satisfied customers"
+  },
+  "why": {
+    "title": "Why companies choose us",
+    "attitude": {
+      "title": "Attitude",
+      "description": "We work hard to make your experience with our service as comfortable as possible"
+    },
+    "success": {
+      "title": "High success rate of connections",
+      "description": "99.7% successful connections and high response rate guaranteed"
+    },
+    "solutions": {
+      "title": "Custom solutions",
+      "description": "We develop solutions that work for the success of your business. New features are released every week"
+    },
+    "support": {
+      "title": "24/7 support",
+      "description": "Technical support specialists will guide you at all stages and ensure everything works correctly. We answer questions 24/7. Your success is our priority"
+    },
+    "constantly": {
+      "title": "Constantly growing proxy pool",
+      "description": "We work on expanding geo and add more IP addresses every day"
+    },
+    "clear": {
+      "title": "Clear IPs",
+      "description": "We have our own proxy infrastructure with clean addresses that will save you from bans"
+    }
+  },
+  "pricing": {
+    "title": "Choose your tariff",
+    "subtitle": "the amount of proxy",
+    "pricePerProxy": "price for one proxy",
+    "connections": "the number of connections",
+    "button": {
+      "buy": "Buy",
+      "purchased": "Purchased",
+      "signIn": "Sign In to Buy"
+    },
+    "mostPopular": "Most Popular",
+    "successToast": "Successfully bought {{name}}!"
+  },
+
+  "tariff": {
+    "month": "month",
+    "starter": {
+      "name": "Starter",
+      "feature1": "High-speed connections",
+      "feature2": "24/7 support",
+      "feature3": "Multiple locations"
+    },
+    "professional": {
+      "name": "Professional",
+      "feature1": "High-speed connections",
+      "feature2": "24/7 support",
+      "feature3": "Multiple locations",
+      "feature4": "Priority support"
+    },
+    "business": {
+      "name": "Business",
+      "feature1": "High-speed connections",
+      "feature2": "24/7 support",
+      "feature3": "Multiple locations",
+      "feature4": "Priority support",
+      "feature5": "Custom solutions"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "feature1": "High-speed connections",
+      "feature2": "24/7 support",
+      "feature3": "Multiple locations",
+      "feature4": "Priority support",
+      "feature5": "Custom solutions",
+      "feature6": "Dedicated manager"
+    },
+    "corporate": {
+      "name": "Corporate",
+      "feature1": "High-speed connections",
+      "feature2": "24/7 support",
+      "feature3": "Multiple locations",
+      "feature4": "Priority support",
+      "feature5": "Custom solutions",
+      "feature6": "Dedicated manager",
+      "feature7": "Custom integrations"
+    },
+    "ultimate": {
+      "name": "Ultimate",
+      "feature1": "High-speed connections",
+      "feature2": "24/7 support",
+      "feature3": "Multiple locations",
+      "feature4": "Priority support",
+      "feature5": "Custom solutions",
+      "feature6": "Dedicated manager",
+      "feature7": "Custom integrations",
+      "feature8": "Enterprise-level security",
+      "feature9": "Unlimited API access"
+    }
+  },
+
+  "applications": {
+    "title": "Learn more about applications",
+    "adVerification": "Ad verification",
+    "priceComparison": "Price comparison",
+    "marketingResearch": "Marketing research",
+    "prohibitedContent": "Prohibited content",
+    "eCommerce": "E-Commerce",
+    "loadTesting": "Load testing",
+    "socialMedia": "Social media",
+    "finance": "Finance"
+  },
+  "partners": {
+    "title": " Our Partners"
+  },
+  "techSupport": {
+    "heading": "Tech Support",
+    "title": "We will support you every step of the way",
+    "subtitle": "Talk to a web data expert to get the most out of your data.",
+    "feature1": "Rated #1 by customers on G2",
+    "feature2": "Average response time less than 10 minutes",
+    "feature3": "24/7 support anytime, anywhere",
+    "contact": "Contact Us",
+    "alt": "Support"
+  },
+  "footer": {
+    "logoAlt": "Asocks logo",
+    "company": "Company",
+    "prices": "Prices",
+    "signIn": "Sign in",
+    "papers": "Papers",
+    "terms": "Terms of use",
+    "privacy": "Privacy Policy",
+    "returns": "Returns Policy",
+    "aboutProduct": "About the product",
+    "partners": "Partners",
+    "coverage": "Coverage",
+    "address": "40 Quai de Dion Bouton, 92800 Puteaux, France",
+    "allRights": "All rights reserved",
+    "telegram": "Telegram",
+    "twitter": "Twitter",
+    "discord": "Discord"
+  },
+  "proxies": {
+    "title": "Premium proxies for {{useCase}}",
+    "highlight": "any use case",
+    "residential": {
+      "title": "Residential proxies",
+      "description": "Never get IP-banned and get complete anonymity",
+      "features": [
+        "7+ million IPs",
+        "Free ASN targeting",
+        "Full IP Pool is available",
+        "Automatic IP Rotation",
+        "Constantly growing IP Pool"
+      ]
+    },
+    "mobile": {
+      "title": "Mobile LTE Proxies",
+      "description": "See the web from the eyes of real mobile users",
+      "features": ["4G/LTE Mobile IPs", "Real Mobile Devices", "Automatic IP Rotation", "97% Success Rate"]
+    },
+    "pricePerGB": "${{price}} per GB",
+    "buttons": {
+      "buyAll": "Buy All",
+      "purchased": "Purchased",
+      "signIn": "Sign In to Buy"
+    }
+  },
+  "auth": {
+    "register": "Register"
+  },
+  "partnersPage": {
+    "heroTitle": "PARTNERS",
+    "heroDescription": "Increase your revenue with an innovative app monetization tool that improves user interaction and privacy.",
+    "noPartners": "No partners found",
+    "modalButton": "Go to {name} page",
+    "footerRights": "All rights reserved"
   }
 }
